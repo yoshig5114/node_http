@@ -1,4 +1,4 @@
-# <Name_Exercise>
+# Node.js HTTP Exercise
 
 ## Getting Started
 
@@ -11,16 +11,29 @@
 
 ## Exercise
 
-- Let’s use Node to write “Hello, World!” to a web page. Reference the Intro to Node.js notes, and place the following code snippets in the correct place
+### Objective
 
-  - `http.createServer()`
-  - `function(request, response) {}`
-  - `response.writeHead()`
-  - `response.end()`
-  - `listen()`
-  - `function(){console.log("Server listening...")}`
+- Create a server that responds to requests
+- The server should have at least ‘/echo’, ‘/’, and ‘/about’ endpoints
+- The server will account for ‘not found’ endpoints
+- The ‘/echo’ endpoint will use the ReadStream response object to read the request body, and return the request body as the response body to the client
+- The ‘/’ endpoint will respond as you wish
+- The ‘/about’ endpoint will return a JSON response with information about yourself
 
-1. With the code in place, change the port from `8080` to `3000`
-2. In your cmd prompt / terminal, navigate to the project directory
-3. Once in the correct directory, run the following command: `node app.js`
-4. Open your browser, and navigate to []("http:localhost:3000")
+### Steps
+
+- Start in your `app.js` file
+- Import the http module
+- Using the http module, call the createServer
+- Pass in a request handler callback function to the createServer method that receives request and response objects as parameters
+- Add an event listener to the request object that listens for the ‘data’ event to be emitted from the ReadStream
+- Store the chunks in an array
+- Add an event listener to the request object that listens for the ‘end’ event to be emitted from the ReadStream
+- Set a new variable ‘body’ equal to Buffer.concat(array).toString()
+- Write a conditional statement that assesses the request url, and responds appropriately:
+  - ‘/’ - Wildcard. Respond with whatever information you wish
+  - ‘/about’ - Respond with an object that has information about yourself
+  - ‘/echo’ - Respond with an object that, a minimum, includes the request method, url and body.
+- Make sure to end your response with .end()
+- Set your server to listen on port 3000
+- Initiate the file using the node.js CLI
